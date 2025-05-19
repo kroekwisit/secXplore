@@ -66,16 +66,16 @@
   align-items: center;
 }
 
-.bottom-button:hover {
-  background-color: #ddd;
-}
-
 .hint, .skip {
   background-color: #39538d;
   padding: 5px 12px;
   border: none;
   border-radius: 5px;
   color: white;
+}
+
+.hint:hover, .skip:hover {
+  background-color: #ddd;
 }
 
 .right-panel {

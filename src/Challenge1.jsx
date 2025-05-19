@@ -156,7 +156,7 @@ const SimulationPage = () => {
 
           {showHint && (
             <div className="hint-box">
-              <p>💬 Hint: Check the address bar to find a hidden path!</p>
+              <p>💬 Hint: Check the address bar and find the flag directory.</p>
             </div>
           )}
 
