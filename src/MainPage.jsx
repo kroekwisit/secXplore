@@ -29,14 +29,14 @@ const MainPage = () => {
       <section className="hero">
         <div className="overlay" />
         <div className="hero-text">
-          <p>Lorem ipsum dolor sit amet consectetur.<br />
+          <p>secXplore<br />
             Neque curabitur sed quam quisque morbi pellentesque hendrerit sed adipiscing.</p>
           <button className="start-button" onClick={handleStartClick}>Start</button>
         </div>
       </section>
 
       <section className="owasp-list">
-        <h2>OWASP TOP 10</h2>
+        <h1>OWASP TOP 10 2021</h1>
         <div className="columns">
           <ol start="1">
             <li>Broken Access Control</li>

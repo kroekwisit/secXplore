@@ -59,6 +59,7 @@
   background-color: #39538d;
   color: white;
   font-family: monospace;
+  cursor: pointer;
 }
 
 .submit:hover{
@@ -78,6 +79,7 @@
   border: none;
   border-radius: 5px;
   color: white;
+  cursor: pointer;
 }
 
 .hint:hover, .skip:hover {

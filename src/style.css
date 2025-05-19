@@ -229,6 +229,7 @@ body, html {
   z-index: 1;
   max-width: 600px;
   padding: 0 1rem;
+  font-size: 20px;
 }
 
 .start-button {
@@ -239,6 +240,11 @@ body, html {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.start-button:hover{
+  background-color: white;
+  color: #3b5998;
 }
 
 /* === OWASP LIST === */
@@ -261,6 +267,7 @@ body, html {
   justify-content: center;
   gap: 3rem;
   flex-wrap: wrap;
+  font-size: 20px;
 }
 
 .columns ol {
