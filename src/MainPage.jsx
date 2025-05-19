@@ -17,9 +17,9 @@ const MainPage = () => {
       <nav className="navbar">
         <div className="logo">secXplore</div>
         <ul className="nav-links">
-          <Link to ="/"><li><a className="nav-button" href="#">Home</a></li></Link>
-          <li><a className="nav-button" href="#">Scoreboard</a></li>
-          <li><a className="nav-button" href="#">About us</a></li>
+          <Link to ="/"><li><a >Home</a></li></Link>
+          <li><a>Scoreboard</a></li>
+          <li><a>About us</a></li>
         </ul>
         <button className="sign-in-button" onClick={handleSignInClick}>Sign in</button>
       </nav>

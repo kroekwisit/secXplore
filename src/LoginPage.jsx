@@ -8,9 +8,9 @@ const LoginPage = () => {
       <nav className="navbar">
         <Link to="/" className="logo">secXplore</Link>
         <ul className="nav-links">
-          <Link to ="/"><li><a className="nav-button" href="#">Home</a></li></Link>
-          <li><a className="nav-button" href="#">Scoreboard</a></li>
-          <li><a className="nav-button" href="#">About us</a></li>
+          <Link to ="/"><li><a >Home</a></li></Link>
+          <li><a>Scoreboard</a></li>
+          <li><a>About us</a></li>
         </ul>
         <ul className="nav-links">
           <li><a href="">Support</a></li>
