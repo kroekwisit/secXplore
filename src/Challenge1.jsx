@@ -12,6 +12,7 @@ const SimulationPage = () => {
   const [answer, setAnswer] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [flagError, setFlagError] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false); // ✅ Login state
 
   const navigateTo = (newUrl) => {
     setUrl(newUrl);
@@ -32,10 +33,10 @@ const SimulationPage = () => {
       setUsername("");
       setPassword("");
       setLoginError("");
+      setLoggedIn(true); // ✅ Set login success
       return;
     }
     setLoginError("Invalid username or password.");
-    return;
   };
 
   const handleHintClick = () => {
@@ -49,14 +50,15 @@ const SimulationPage = () => {
     } else {
       setFlagError("Incorrect flag. Try again");
       setTimeout(() => {
-      setFlagError("");
-    }, 3000);
+        setFlagError("");
+      }, 3000);
     }
   };
 
   const renderPage = () => {
     const userMatch = url.match(/user=(\d+)/);
     const userId = userMatch ? userMatch[1] : null;
+
     const handleKeyDown = (e) => {
       if (e.key === "Enter") {
         handleLogin(e);
@@ -90,7 +92,16 @@ const SimulationPage = () => {
       );
     }
 
-    if (url.includes("/home") && userId) {
+    if (url.includes("/home")) {
+      if (!loggedIn) {
+        return (
+          <div>
+            <h2>Access Denied</h2>
+            <p>You must <strong>log in</strong> to access this page.</p>
+          </div>
+        );
+      }
+
       if (userId === "678") {
         return (
           <div>
@@ -194,7 +205,6 @@ const SimulationPage = () => {
           <div className="popup-content">
             <h3>🎉 Challenge Completed!</h3>
             <p>You found the flag successfully.</p>
-
             <div className="popup-buttons">
               <button onClick={() => setShowPopup(false)}>Close</button>
               <Link to="/" className="confirm-button">
