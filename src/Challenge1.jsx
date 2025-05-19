@@ -29,11 +29,11 @@ const SimulationPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (username === "Bob" && password === "123") {
-      navigateTo("https://secxplore.com/home/user=678");
+      navigateTo("https://secxplore.com/home/user=007");
       setUsername("");
       setPassword("");
       setLoginError("");
-      setLoggedIn(true); // ✅ Set login success
+      setLoggedIn(true);
       return;
     }
     setLoginError("Invalid username or password.");
@@ -102,14 +102,14 @@ const SimulationPage = () => {
         );
       }
 
-      if (userId === "678") {
+      if (userId === "007") {
         return (
           <div>
             <h2>Welcome back Bob!</h2>
             <p>Hope you have a great day!.</p>
           </div>
         );
-      } else if (userId === "1") {
+      } else if (userId === "001") {
         return (
           <div className="flag-box">
             <h2>⚠️ Broken Access Control</h2>
@@ -210,7 +210,7 @@ const SimulationPage = () => {
             <h3>Challenge Completed!</h3>
             <p>
               Is this really a top secret villian website?<br/>
-              what a weak website...
+              what a weak organization...
             </p>
             <div className="popup-buttons">
               <button onClick={() => setShowPopup(false)}>Close</button>
