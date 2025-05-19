@@ -148,9 +148,13 @@ const SimulationPage = () => {
 
       <div className="content">
         <div className="left-panel">
-          <h3>Challenge #1</h3>
-          <p>Your username is <strong>Bob</strong> and your password is <strong>123</strong>.<br />
-            You have to find the flag, maybe it store in admin page.<br />
+          <h2>Challenge #1</h2>
+          <p>Somehow you can access to the villian top secret website.<br/>
+            You notice that this website have a really bad design but who's care.<br/><br/>
+            Our intel have some information about this website, let's see..<br/><br/>
+            "username is <strong>Bob</strong> and password is <strong>123</strong>"<br/><br/>
+            Really? Bob? and that password kinda?... nevermind.<br/>
+            I have to find the secret (Flag) in this website, maybe it locate in admin page.<br/><br/>
             Admin usually have the <strong>first ID</strong> right?
           </p>
           <input
@@ -203,8 +207,11 @@ const SimulationPage = () => {
       {showPopup && (
         <div className="popup-overlay">
           <div className="popup-content">
-            <h3>🎉 Challenge Completed!</h3>
-            <p>You found the flag successfully.</p>
+            <h3>Challenge Completed!</h3>
+            <p>
+              Is this really a top secret villian website?<br/>
+              what a weak website...
+            </p>
             <div className="popup-buttons">
               <button onClick={() => setShowPopup(false)}>Close</button>
               <Link to="/" className="confirm-button">
