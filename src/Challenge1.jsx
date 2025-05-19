@@ -128,7 +128,7 @@ const SimulationPage = () => {
       <nav className="navbar">
         <Link to="/" className="logo">secXplore</Link>
         <ul className="nav-links">
-          <li>Home</li>
+          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
           <li>Scoreboard</li>
           <li>About us</li>
           <li>Account</li>

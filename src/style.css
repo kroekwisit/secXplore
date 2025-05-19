@@ -12,7 +12,7 @@ body, html {
   height: 100%;
 }
 
-/* === NAVBAR === */
+
 .navbar {
   width: 100%;
   background-color: #3b5998;
@@ -20,9 +20,16 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 32px;
+  /* padding: 16px 32px; */
+  padding: 10px 20px;
   font-size: 20px;
   font-weight: bold;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Space between links and button */
 }
 
 .logo {
@@ -123,14 +130,15 @@ body, html {
 }
 
 .sign-in-button {
-  background-color: #3b5998;
-  color: White;
+  background-color: white;
+  color: #3b5998;
   border: none;
   padding: 10px;
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 .sign-in-button:hover {

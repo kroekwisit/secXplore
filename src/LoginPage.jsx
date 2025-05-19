@@ -8,13 +8,9 @@ const LoginPage = () => {
       <nav className="navbar">
         <Link to="/" className="logo">secXplore</Link>
         <ul className="nav-links">
-          <Link to ="/"><li><a >Home</a></li></Link>
-          <li><a>Scoreboard</a></li>
-          <li><a>About us</a></li>
-        </ul>
-        <ul className="nav-links">
-          <li><a href="">Support</a></li>
-        </ul>
+          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
+          <li>About us</li>
+          </ul>
       </nav>
 
       <div className="login-form">

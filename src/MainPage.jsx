@@ -16,12 +16,14 @@ const MainPage = () => {
     <div className="main-page">
       <nav className="navbar">
         <div className="logo">secXplore</div>
+        <div className="nav-right">
         <ul className="nav-links">
-          <Link to ="/"><li><a >Home</a></li></Link>
-          <li><a>Scoreboard</a></li>
-          <li><a>About us</a></li>
+          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
+          <li>Scoreboard</li>
+          <li>About us</li>
         </ul>
         <button className="sign-in-button" onClick={handleSignInClick}>Sign in</button>
+      </div>
       </nav>
 
       <section className="hero">

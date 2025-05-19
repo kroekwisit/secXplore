@@ -19,6 +19,12 @@
   display: flex;
   gap: 20px;
   font-size: 14px;
+  text-decoration: none;
+}
+
+.textdecoration_none{
+  text-decoration: none;
+  color: white;
 }
 
 .content {
