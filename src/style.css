@@ -1,0 +1,261 @@
+/* === GLOBAL RESET & BASE === */
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e2d42;
+  color: white;
+  height: 100%;
+}
+
+/* === NAVBAR === */
+.navbar {
+  width: 100%;
+  background-color: #3b5998;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 2.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.25rem;
+  padding: 0.4rem 0;
+  display: inline-block;
+}
+
+/* === LOGIN PAGE === */
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #1e2d42;
+}
+
+.login-form {
+  background-color: #273a55;
+  padding: 40px 30px;
+  margin-top: 60px;
+  border-radius: 12px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin: 0;
+  color: white;
+}
+
+.input-box {
+  position: relative;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 40px 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background-color: #3b5998;
+  color: white;
+  font-size: 14px;
+}
+
+.input-box .icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #ccc;
+}
+
+.options a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.button {
+  background-color: #3b5998;
+  color: White;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.sign-in-button {
+  background-color: #3b5998;
+  color: White;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.sign-in-button:hover {
+  background-color: #ddd;
+}
+
+.button:hover {
+  background-color: #ddd;
+}
+
+.nav-button {
+  background-color: #3b5998;
+  color: White;
+  border: none;
+  padding: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+
+.register-link {
+  font-size: 13px;
+  text-align: center;
+  color: #ccc;
+}
+
+.register-link a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #3b5998;
+  margin: 0;
+}
+
+.or-text {
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
+
+.google-button {
+  background-color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b5998;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.google-button:hover {
+  background-color: #ddd;
+}
+
+/* === HERO SECTION (Main Page) === */
+.hero {
+  position: relative;
+  height: 300px;
+  background: url('IMG_5072.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(30, 45, 66, 0) 70%, rgba(30, 45, 66, 0.8) 100%);
+  pointer-events: none;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  padding: 0 1rem;
+}
+
+.start-button {
+  margin-top: 1rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #3b5998;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* === OWASP LIST === */
+.owasp-list {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: -80px; /* You can adjust this value */
+  padding-top: 100px; /* Prevent content from being hidden */
+  position: relative;
+  z-index: 1;
+}
+
+.owasp-list h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.2rem;
+}
+
+.columns {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.columns ol {
+  list-style-position: inside;
+  text-align: left;
+}
