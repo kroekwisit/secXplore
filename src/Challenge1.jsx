@@ -9,6 +9,9 @@ const SimulationPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [flagError, setFlagError] = useState("");
 
   const navigateTo = (newUrl) => {
     setUrl(newUrl);
@@ -23,34 +26,41 @@ const SimulationPage = () => {
   };
 
   const handleLogin = (e) => {
-  e.preventDefault(); // prevent page reload
+    e.preventDefault();
+    if (username === "Bob" && password === "123") {
+      navigateTo("https://secxplore.com/home/user=678");
+      setUsername("");
+      setPassword("");
+      setLoginError("");
+      return;
+    }
+    setLoginError("Invalid username or password.");
+    return;
+  };
 
-  if (username === "Bob" && password === "123") {
-    navigateTo("https://secxplore.com/home/user=678");
-    setUsername("");
-    setPassword("");
-    setLoginError("");
-  }
-
-
-
-  setLoginError("❌ Invalid username or password.");
-  return;
-};
-
-    const handleHintClick = () => {
+  const handleHintClick = () => {
     setShowHint(true);
-    // setShowHint(!showHint); // toggles on/off
-    };
+  };
 
+  const handleSubmitAnswer = () => {
+    if (answer.trim() === "flag{You_can_access_another_user?}") {
+      setShowPopup(true);
+      setFlagError("");
+    } else {
+      setFlagError("Incorrect flag. Try again");
+      setTimeout(() => {
+      setFlagError("");
+    }, 3000);
+    }
+  };
 
   const renderPage = () => {
     const userMatch = url.match(/user=(\d+)/);
     const userId = userMatch ? userMatch[1] : null;
     const handleKeyDown = (e) => {
-        if (e.key === "Enter") {
-            handleLogin(e);  // Call your login function
-        }
+      if (e.key === "Enter") {
+        handleLogin(e);
+      }
     };
 
     if (url.includes("/login")) {
@@ -91,8 +101,8 @@ const SimulationPage = () => {
       } else if (userId === "1") {
         return (
           <div className="flag-box">
-            <h2>⚠️ Unauthorized Access?</h2>
-            <p className="flag">flag&#123;You_can_access_other_user??&#125;</p>
+            <h2>⚠️ Broken Access Control</h2>
+            <p className="flag">flag&#123;You_can_access_another_user?&#125;</p>
           </div>
         );
       } else {
@@ -128,24 +138,32 @@ const SimulationPage = () => {
       <div className="content">
         <div className="left-panel">
           <h3>Challenge #1</h3>
-            <p>Your username is <strong>Bob</strong> and your password is <strong>123</strong>.<br />
-               You have to find the flag, maybe it store in admin page.<br />
-               Admin usually have the <strong>first ID</strong> right?
-            </p>
-            <input type="text" placeholder="Answer here" />
-            <button className="submit">Submit</button>
+          <p>Your username is <strong>Bob</strong> and your password is <strong>123</strong>.<br />
+            You have to find the flag, maybe it store in admin page.<br />
+            Admin usually have the <strong>first ID</strong> right?
+          </p>
+          <input
+            type="text"
+            placeholder="Answer here"
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+          />
+          <button className="submit" onClick={handleSubmitAnswer}>Submit</button>
 
-            {/* HINT SECTION */}
-            {showHint && (
-                <div className="hint-box">
-                <p>💬 Hint: Check the address bar to find a hidden path!</p>
-                </div>
-            )}
+          {flagError && (
+            <p style={{ color: "red", marginTop: "10px" }}>{flagError}</p>
+          )}
 
-            <div className="bottom-buttons">
-                <button className="hint" onClick={handleHintClick}>💡 HINT</button>
-                <button className="skip">SKIP? ➔</button>
+          {showHint && (
+            <div className="hint-box">
+              <p>💬 Hint: Check the address bar to find a hidden path!</p>
             </div>
+          )}
+
+          <div className="bottom-buttons">
+            <button className="hint" onClick={handleHintClick}>💡 HINT</button>
+            <Link to="/"><button className="skip">SKIP? ➔</button></Link>
+          </div>
         </div>
 
         <div className="right-panel">
@@ -170,6 +188,22 @@ const SimulationPage = () => {
           </div>
         </div>
       </div>
+
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <h3>🎉 Challenge Completed!</h3>
+            <p>You found the flag successfully.</p>
+
+            <div className="popup-buttons">
+              <button onClick={() => setShowPopup(false)}>Close</button>
+              <Link to="/" className="confirm-button">
+                <button>Confirm</button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
