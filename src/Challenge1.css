@@ -22,7 +22,7 @@
   text-decoration: none;
 }
 
-.textdecoration_none{
+.textdecoration_none {
   text-decoration: none;
   color: white;
 }
@@ -62,7 +62,7 @@
   cursor: pointer;
 }
 
-.submit:hover{
+.submit:hover {
   background-color: #ddd;
 }
 
@@ -73,7 +73,8 @@
   align-items: center;
 }
 
-.hint, .skip {
+.hint,
+.skip {
   background-color: #39538d;
   padding: 5px 12px;
   border: none;
@@ -82,7 +83,8 @@
   cursor: pointer;
 }
 
-.hint:hover, .skip:hover {
+.hint:hover,
+.skip:hover {
   background-color: #ddd;
 }
 
@@ -187,7 +189,6 @@
   font-size: 16px;
 }
 
-
 .hint-box {
   background-color: #2a3e5c;
   color: #ffd700;
@@ -238,7 +239,6 @@
 .confirm-button button:hover {
   background-color: white;
 }
-
 
 @keyframes popup-fade-in {
   from {

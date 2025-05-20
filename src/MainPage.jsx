@@ -17,21 +17,31 @@ const MainPage = () => {
       <nav className="navbar">
         <div className="logo">secXplore</div>
         <div className="nav-right">
-        <ul className="nav-links">
-          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
-          <li>Scoreboard</li>
-          <li>About us</li>
-        </ul>
-        <button className="sign-in-button" onClick={handleSignInClick}>Sign in</button>
-      </div>
+          <ul className="nav-links">
+            <Link to="/" className="textdecoration_none">
+              <li>Home</li>
+            </Link>
+            <li>Scoreboard</li>
+            <li>About us</li>
+          </ul>
+          <button className="sign-in-button" onClick={handleSignInClick}>
+            Sign in
+          </button>
+        </div>
       </nav>
 
       <section className="hero">
         <div className="overlay" />
         <div className="hero-text">
-          <p>secXplore<br/>
-            Neque curabitur sed quam quisque morbi pellentesque hendrerit sed adipiscing.</p>
-          <button className="start-button" onClick={handleStartClick}>Start</button>
+          <p>
+            secXplore
+            <br />
+            Neque curabitur sed quam quisque morbi pellentesque hendrerit sed
+            adipiscing.
+          </p>
+          <button className="start-button" onClick={handleStartClick}>
+            Start
+          </button>
         </div>
       </section>
 

@@ -12,9 +12,13 @@ const LoginPage = () => {
   return (
     <div className="login-page">
       <nav className="navbar">
-        <Link to="/" className="logo">secXplore</Link>
+        <Link to="/" className="logo">
+          secXplore
+        </Link>
         <ul className="nav-links">
-          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
+          <Link to="/" className="textdecoration_none">
+            <li>Home</li>
+          </Link>
           <li>About us</li>
         </ul>
       </nav>
@@ -33,11 +37,15 @@ const LoginPage = () => {
         </div>
 
         <div className="options">
-          <label><input type="checkbox" /> Remember me</label>
+          <label>
+            <input type="checkbox" /> Remember me
+          </label>
           <a href="#">Forgot password?</a>
         </div>
 
-          <button className="button" onClick={handleLoginClick}>Sign in</button>
+        <button className="button" onClick={handleLoginClick}>
+          Sign in
+        </button>
 
         <div className="register-link">
           Don’t have an account? <Link to="/Register">Create Account</Link>
@@ -46,7 +54,9 @@ const LoginPage = () => {
         <hr className="divider" />
         <p className="or-text">Or sign up with</p>
 
-        <button className="google-button"><FaGoogle /></button>
+        <button className="google-button">
+          <FaGoogle />
+        </button>
       </div>
     </div>
   );

@@ -6,11 +6,15 @@ const RegisterPage = () => {
   return (
     <div className="login-page">
       <nav className="navbar">
-        <Link to="/" className="logo">secXplore</Link>
+        <Link to="/" className="logo">
+          secXplore
+        </Link>
         <ul className="nav-links">
-          <Link to="/" className="textdecoration_none"><li>Home</li></Link>
+          <Link to="/" className="textdecoration_none">
+            <li>Home</li>
+          </Link>
           <li>About us</li>
-          </ul>
+        </ul>
       </nav>
 
       <div className="login-form">
@@ -39,7 +43,10 @@ const RegisterPage = () => {
         <button className="button">Create Account</button>
 
         <div className="register-link">
-          Already have an account? <Link to="/login"><strong>Sign in</strong></Link>
+          Already have an account?{" "}
+          <Link to="/login">
+            <strong>Sign in</strong>
+          </Link>
         </div>
       </div>
     </div>

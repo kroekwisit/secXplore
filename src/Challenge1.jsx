@@ -85,7 +85,8 @@ const SimulationPage = () => {
             onChange={(e) => setPassword(e.target.value)}
             onKeyDown={handleKeyDown}
           />
-          <br /><br />
+          <br />
+          <br />
           <button onClick={handleLogin}>Login</button>
           {loginError && <p style={{ color: "red" }}>{loginError}</p>}
         </div>
@@ -97,7 +98,9 @@ const SimulationPage = () => {
         return (
           <div>
             <h2>Access Denied</h2>
-            <p>You must <strong>log in</strong> to access this page.</p>
+            <p>
+              You must <strong>log in</strong> to access this page.
+            </p>
           </div>
         );
       }
@@ -129,7 +132,9 @@ const SimulationPage = () => {
     return (
       <div>
         <h2>404 - Page Not Found</h2>
-        <p>Check the URL or go back to <code>/login</code>.</p>
+        <p>
+          Check the URL or go back to <code>/login</code>.
+        </p>
       </div>
     );
   };
@@ -137,9 +142,13 @@ const SimulationPage = () => {
   return (
     <div className="simulation-container">
       <nav className="navbar">
-        <Link to="/Dashboard" className="logo">secXplore</Link>
+        <Link to="/Dashboard" className="logo">
+          secXplore
+        </Link>
         <ul className="nav-links">
-          <Link to="/Dashboard" className="textdecoration_none"><li>Home</li></Link>
+          <Link to="/Dashboard" className="textdecoration_none">
+            <li>Home</li>
+          </Link>
           <li>Scoreboard</li>
           <li>About us</li>
           <li>Account</li>
@@ -149,12 +158,25 @@ const SimulationPage = () => {
       <div className="content">
         <div className="left-panel">
           <h2>Challenge #1</h2>
-          <p>Somehow you can access to the villian top secret website.<br/>
-            You notice that this website have a really bad design but who's care.<br/><br/>
-            Our intel have some information about this website, let's see..<br/><br/>
-            "username is <strong>Bob</strong> and password is <strong>123</strong>"<br/><br/>
-            Really? Bob? and that password kinda?... nevermind.<br/>
-            I have to find the secret (Flag) in this website, maybe it locate in admin page.<br/><br/>
+          <p>
+            Somehow you can access to the villian top secret website.
+            <br />
+            You notice that this website have a really bad design but who's
+            care.
+            <br />
+            <br />
+            Our intel have some information about this website, let's see..
+            <br />
+            <br />
+            "username is <strong>Bob</strong> and password is{" "}
+            <strong>123</strong>"<br />
+            <br />
+            Really? Bob? and that password kinda?... nevermind.
+            <br />
+            I have to find the secret (Flag) in this website, maybe it locate in
+            admin page.
+            <br />
+            <br />
             Admin usually have the <strong>first ID</strong> right?
           </p>
           <input
@@ -163,7 +185,9 @@ const SimulationPage = () => {
             value={answer}
             onChange={(e) => setAnswer(e.target.value)}
           />
-          <button className="submit" onClick={handleSubmitAnswer}>Submit</button>
+          <button className="submit" onClick={handleSubmitAnswer}>
+            Submit
+          </button>
 
           {flagError && (
             <p style={{ color: "red", marginTop: "10px" }}>{flagError}</p>
@@ -176,8 +200,12 @@ const SimulationPage = () => {
           )}
 
           <div className="bottom-buttons">
-            <button className="hint" onClick={handleHintClick}>💡 HINT</button>
-            <Link to="/"><button className="skip">SKIP? ➔</button></Link>
+            <button className="hint" onClick={handleHintClick}>
+              💡 HINT
+            </button>
+            <Link to="/">
+              <button className="skip">SKIP? ➔</button>
+            </Link>
           </div>
         </div>
 
@@ -209,7 +237,8 @@ const SimulationPage = () => {
           <div className="popup-content">
             <h3>Challenge Completed!</h3>
             <p>
-              Is this really a top secret villian website?<br/>
+              Is this really a top secret villian website?
+              <br />
               what a weak organization...
             </p>
             <div className="popup-buttons">
