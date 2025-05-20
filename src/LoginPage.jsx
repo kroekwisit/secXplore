@@ -1,8 +1,14 @@
-import { FaLock, FaGoogle, FaKeyboard } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaKeyboard, FaLock, FaGoogle } from "react-icons/fa";
 import "./style.css";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const handleLoginClick = () => {
+    navigate("/Dashboard");
+  };
+
   return (
     <div className="login-page">
       <nav className="navbar">
@@ -10,7 +16,7 @@ const LoginPage = () => {
         <ul className="nav-links">
           <Link to="/" className="textdecoration_none"><li>Home</li></Link>
           <li>About us</li>
-          </ul>
+        </ul>
       </nav>
 
       <div className="login-form">
@@ -31,10 +37,10 @@ const LoginPage = () => {
           <a href="#">Forgot password?</a>
         </div>
 
-        <Link to="/Dashboard"><button className="button">Sign in</button></Link>
+          <button className="button" onClick={handleLoginClick}>Sign in</button>
 
         <div className="register-link">
-          Don’t have an account? <Link to="/Register"><a href="#">Create Account</a></Link>
+          Don’t have an account? <Link to="/Register">Create Account</Link>
         </div>
 
         <hr className="divider" />
