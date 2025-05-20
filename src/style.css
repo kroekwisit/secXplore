@@ -29,7 +29,7 @@ body, html {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 20px; /* Space between links and button */
+  gap: 20px;
 }
 
 .logo {
@@ -208,7 +208,7 @@ body, html {
 /* === HERO SECTION (Main Page) === */
 .hero {
   position: relative;
-  height: 450px;
+  height: 420px;
   background: url('mio\ leser\ beam.gif') no-repeat center center/cover;
   display: flex;
   align-items: center;
@@ -274,4 +274,74 @@ body, html {
 .columns ol {
   list-style-position: inside;
   text-align: left;
+}
+
+
+/* Header image section */
+.dashboard-header {
+  position: relative;
+  height: 220px;
+  background: url('mio\ leser\ beam.gif') no-repeat center center/cover; /* <-- Update image path */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.dashboard-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-header-content {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Main content area */
+.dashboard-content {
+  background-color: #1e2d42;
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.dashboard-content h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+/* Challenge cards */
+.challenge-box {
+  background-color: rgba(39, 58, 85, 0.95);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.challenge-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.start-button {
+  background-color: #3b5998;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.start-button:hover {
+  background-color: #ddd;
+  color: #3b5998;
 }

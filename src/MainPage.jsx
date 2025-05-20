@@ -9,7 +9,7 @@ const MainPage = () => {
   };
 
   const handleStartClick = () => {
-    navigate("/Challenge1");
+    navigate("/Dashboard");
   };
 
   return (
@@ -29,7 +29,7 @@ const MainPage = () => {
       <section className="hero">
         <div className="overlay" />
         <div className="hero-text">
-          <p>secXplore<br />
+          <p>secXplore<br/>
             Neque curabitur sed quam quisque morbi pellentesque hendrerit sed adipiscing.</p>
           <button className="start-button" onClick={handleStartClick}>Start</button>
         </div>

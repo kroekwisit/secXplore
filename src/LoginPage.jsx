@@ -31,7 +31,7 @@ const LoginPage = () => {
           <a href="#">Forgot password?</a>
         </div>
 
-        <button className="button">Sign in</button>
+        <Link to="/Dashboard"><button className="button">Sign in</button></Link>
 
         <div className="register-link">
           Don’t have an account? <Link to="/Register"><a href="#">Create Account</a></Link>
