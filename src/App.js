@@ -27,6 +27,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MainPage from "./MainPage";
 import LoginPage from "./LoginPage";
+import RegisterPage from "./RegisterPage";
 import SimulationPage from "./Challenge1";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/Register" element={<RegisterPage />} />
         <Route path="/Challenge1" element={<SimulationPage />} />
       </Routes>
     </Router>

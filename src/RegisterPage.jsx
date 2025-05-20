@@ -1,8 +1,8 @@
-import { FaLock, FaGoogle, FaKeyboard } from "react-icons/fa";
+import { FaLock, FaKeyboard, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./style.css";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="login-page">
       <nav className="navbar">
@@ -14,7 +14,7 @@ const LoginPage = () => {
       </nav>
 
       <div className="login-form">
-        <h2>Sign in</h2>
+        <h2>Register</h2>
 
         <div className="input-box">
           <input type="text" placeholder="Username" />
@@ -22,28 +22,28 @@ const LoginPage = () => {
         </div>
 
         <div className="input-box">
+          <input type="email" placeholder="Email" />
+          <FaEnvelope className="icon" />
+        </div>
+
+        <div className="input-box">
           <input type="password" placeholder="Password" />
           <FaLock className="icon" />
         </div>
 
-        <div className="options">
-          <label><input type="checkbox" /> Remember me</label>
-          <a href="#">Forgot password?</a>
+        <div className="input-box">
+          <input type="password" placeholder="Confirm Password" />
+          <FaLock className="icon" />
         </div>
 
-        <button className="button">Sign in</button>
+        <button className="button">Create Account</button>
 
         <div className="register-link">
-          Don’t have an account? <Link to="/Register"><a href="#">Create Account</a></Link>
+          Already have an account? <Link to="/login"><strong>Sign in</strong></Link>
         </div>
-
-        <hr className="divider" />
-        <p className="or-text">Or sign up with</p>
-
-        <button className="google-button"><FaGoogle /></button>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;
