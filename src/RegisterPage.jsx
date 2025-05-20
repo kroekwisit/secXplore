@@ -1,8 +1,14 @@
 import { FaLock, FaKeyboard, FaEnvelope } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 
 const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleRegisterClick = () => {
+    navigate("/Dashboard");
+  };
+
   return (
     <div className="login-page">
       <nav className="navbar">
@@ -40,7 +46,9 @@ const RegisterPage = () => {
           <FaLock className="icon" />
         </div>
 
-        <button className="button">Create Account</button>
+        <button className="button" onClick={handleRegisterClick}>
+          Create Account
+        </button>
 
         <div className="register-link">
           Already have an account?{" "}
