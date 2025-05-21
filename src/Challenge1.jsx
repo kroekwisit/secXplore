@@ -12,7 +12,7 @@ const SimulationPage = () => {
   const [answer, setAnswer] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [flagError, setFlagError] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false); // ✅ Login state
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigateTo = (newUrl) => {
     setUrl(newUrl);
@@ -203,7 +203,7 @@ const SimulationPage = () => {
             <button className="hint" onClick={handleHintClick}>
               💡 HINT
             </button>
-            <Link to="/">
+            <Link to="/Dashboard">
               <button className="skip">SKIP? ➔</button>
             </Link>
           </div>

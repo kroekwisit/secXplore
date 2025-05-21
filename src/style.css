@@ -208,7 +208,7 @@ html {
 .hero {
   position: relative;
   height: 420px;
-  background: url("mio\ leser\ beam.gif") no-repeat center center/cover;
+  background: url("IMG_5072.jpg") no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,7 +283,7 @@ html {
 .dashboard-header {
   position: relative;
   height: 220px;
-  background: url("mio\ leser\ beam.gif") no-repeat center center/cover; /* <-- Update image path */
+  background: url("IMG_5072.jpg") no-repeat center center/cover; /* <-- Update image path */
   display: flex;
   align-items: center;
   justify-content: center;
