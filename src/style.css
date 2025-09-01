@@ -1,271 +1,224 @@
-/* === GLOBAL RESET & BASE === */
+/* === RESET & BASE === */
 * {
   box-sizing: border-box;
 }
-
-body,
-html {
+html,
+body {
   margin: 0;
   padding: 0;
-  font-family: monospace;
-  background-color: #1e2d42;
-  color: white;
   height: 100%;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  color: #fff;
+  background: radial-gradient(
+    1200px 600px at 20% -10%,
+    #2a3f61 0%,
+    #1e2d42 40%,
+    #152236 100%
+  );
+}
+.textdecoration_none {
+  text-decoration: none;
+  color: inherit;
 }
 
+/* === NAVBAR (shared) === */
 .navbar {
+  position: sticky;
   width: 100%;
-  background-color: #3b5998;
-  color: white;
+  top: 0;
+  z-index: 40;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  /* padding: 16px 32px; */
-  padding: 10px 20px;
-  font-size: 20px;
-  font-weight: bold;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: rgba(18, 27, 45, 0.55);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-
+.logo {
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: 0.3px;
+}
+.logo-gradient {
+  background: linear-gradient(90deg, #a8c5ff, #ffffff, #9bd1ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 10px 30px rgba(60, 120, 255, 0.25);
+  animation: shine 5s linear infinite;
+}
+@keyframes shine {
+  50% {
+    filter: drop-shadow(0 0 12px rgba(160, 190, 255, 0.35));
+  }
+}
 .nav-right {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-
-.logo {
-  font-weight: bold;
-  font-size: 2.5rem;
-  color: white;
-  text-decoration: none;
-}
-
 .nav-links {
   display: flex;
-  justify-content: center;
   list-style: none;
-  gap: 1.5rem;
-  list-style: none;
+  gap: 10px;
   padding: 0;
   margin: 0;
 }
-
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.25rem;
-  padding: 0.4rem 0;
-  display: inline-block;
-}
-
-/* === LOGIN PAGE === */
-.login-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100vh;
-  background-color: #1e2d42;
-}
-
-.login-form {
-  background-color: #273a55;
-  padding: 40px 30px;
-  margin-top: 60px;
-  border-radius: 12px;
-  width: 320px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-}
-
-.login-form h2 {
-  text-align: center;
-  margin: 0;
-  color: white;
-}
-
-.input-box {
+.nav-item {
+  padding: 6px 10px;
+  border-radius: 8px;
   position: relative;
+  cursor: pointer;
 }
-
-.input-box input {
-  width: 100%;
-  padding: 10px 40px 10px 12px;
-  border-radius: 6px;
-  border: none;
-  background-color: #3b5998;
-  color: white;
-  font-size: 14px;
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
 }
-
-.input-box .icon {
+.nav-item::after {
+  content: "";
   position: absolute;
+  left: 12px;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
+  bottom: 4px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    rgba(160, 190, 255, 0),
+    rgba(160, 190, 255, 0.6),
+    rgba(160, 190, 255, 0)
+  );
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.22s ease;
 }
-
-.options {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #ccc;
+.nav-item:hover::after {
+  transform: scaleX(1);
 }
-
-.options a {
-  color: #bbb;
-  text-decoration: none;
-}
-
-.button {
-  background-color: #3b5998;
-  color: White;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
 .sign-in-button {
-  background-color: white;
-  color: #3b5998;
-  border: none;
-  padding: 8px;
-  border-radius: 5px;
+  background: #fff;
+  color: #274777;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-weight: 800;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 15px;
-  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
 }
-
 .sign-in-button:hover {
-  background-color: #ddd;
+  background: #eaf0ff;
+  transform: translateY(-1px);
 }
 
-.button:hover {
-  background-color: #ddd;
-}
-
-.nav-button {
-  background-color: #3b5998;
-  color: White;
-  border: none;
-  padding: 30px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.register-link {
-  font-size: 13px;
-  text-align: center;
-  color: #ccc;
-}
-
-.register-link a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid #3b5998;
-  margin: 0;
-}
-
-.or-text {
-  text-align: center;
-  font-size: 13px;
-  color: #aaa;
-}
-
-.google-button {
-  background-color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #3b5998;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.google-button:hover {
-  background-color: #ddd;
-}
-
-/* === HERO SECTION (Main Page) === */
+/* === MAIN PAGE: HERO === */
 .hero {
+  --mx: 0;
+  --my: 0;
   position: relative;
-  height: 420px;
-  background: url("IMG_5072.jpg") no-repeat center center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 460px;
+  display: grid;
+  place-items: center;
   text-align: center;
-  z-index: 2;
+  isolation: isolate;
+  background: url("bg01.png") center/cover no-repeat;
 }
-
 .hero .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(30, 45, 66, 0) 70%,
-    rgba(30, 45, 66, 0.8) 100%
-  );
+  z-index: 0;
   pointer-events: none;
 }
-
 .hero-text {
   position: relative;
   z-index: 1;
-  max-width: 600px;
+  max-width: 760px;
   padding: 0 1rem;
-  font-size: 25px;
+}
+.brand {
+  margin: 0 0 6px;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.4px;
+}
+.subline {
+  margin: 0 auto 16px;
+  max-width: 680px;
+  color: #e6eefc;
+  opacity: 0.95;
+}
+/* optional typing effect – remove .type-mask on the element to disable */
+.type-mask {
+  --steps: 40;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid rgba(230, 238, 252, 0.75);
+  width: 0ch;
+  animation: typing 3.5s steps(var(--steps)) 0.2s forwards,
+    caret 1s steps(1) infinite;
+}
+@keyframes typing {
+  to {
+    width: 60ch;
+  }
+}
+@keyframes caret {
+  50% {
+    border-color: transparent;
+  }
 }
 
+/* Start button */
 .start-button {
-  margin-top: 1rem;
-  padding: 10px 30px;
-  font-size: 20px;
-  background-color: #3b5998;
-  color: white;
-  border: none;
-  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: 12px;
   cursor: pointer;
-}
+  background: linear-gradient(180deg, #3b72ff, #274777);
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.2px;
 
+  transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
 .start-button:hover {
-  background-color: white;
-  color: #3b5998;
+  transform: translateY(-1px);
+  box-shadow: 0 18px 36px rgba(25, 69, 209, 0.45);
+  filter: brightness(1.02);
+}
+.start-button:active {
+  transform: translateY(0);
+}
+.ripple-circle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out forwards;
+}
+@keyframes ripple {
+  to {
+    width: 360px;
+    height: 360px;
+    opacity: 0;
+  }
 }
 
-/* === OWASP LIST === */
+/* === MAIN PAGE: OWASP LIST (plain text) === */
 .owasp-list {
   text-align: center;
   padding: 2rem 1rem;
-  margin-top: -80px; /* You can adjust this value */
-  padding-top: 100px; /* Prevent content from being hidden */
+  margin-top: -80px;
+  padding-top: 100px;
   position: relative;
   z-index: 1;
 }
-
-.owasp-list h2 {
+.owasp-list h1 {
   font-size: 1.5rem;
   margin-bottom: 1.2rem;
 }
-
 .columns {
   display: flex;
   justify-content: center;
@@ -273,77 +226,560 @@ html {
   flex-wrap: wrap;
   font-size: 20px;
 }
-
 .columns ol {
   list-style-position: inside;
   text-align: left;
+  padding: 0;
+  margin: 0;
 }
 
-/* Header image section */
-.dashboard-header {
+/* Generic button (used on dashboard cards, etc.) */
+.button {
   position: relative;
-  height: 220px;
-  background: url("IMG_5072.jpg") no-repeat center center/cover; /* <-- Update image path */
+  overflow: hidden; /* keep ripple contained */
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-weight: 800;
+  cursor: pointer;
+  border: none;
+  background: #3b5998; /* solid flat blue */
+  color: #fff;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.button:hover {
+  background: #2e4679; /* subtle darken, no glow */
+  transform: translateY(-1px);
+}
+
+/* Ripple animation (still active) */
+.ripple-circle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out forwards;
+}
+
+@keyframes ripple {
+  to {
+    width: 340px;
+    height: 340px;
+    opacity: 0;
+  }
+}
+
+/* Login form button (full-width, same flat style) */
+.login-form .button {
+  width: 100%;
+  height: 44px;
+  margin-top: 12px;
+  border-radius: 12px;
+}
+
+/* === LOGIN === */
+/* === LOGIN (card look like screenshot) === */
+.login-page {
+  min-height: 100vh;
+  background: #1e2d42;
+  display: grid;
+  grid-template-rows: auto 1fr; /* navbar + content */
+}
+
+.login-form {
+  width: min(440px, 92vw);
+  margin: 0 auto;
+  align-self: center;
+  padding: 28px 26px;
+  border-radius: 14px;
+  background: #25374f; /* darker card face */
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+.login-form h2 {
+  text-align: center;
+  margin: 2px 0 18px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+/* field spacing */
+.input-box {
+  position: relative;
+  margin-top: 14px;
+}
+.input-box:first-of-type {
+  margin-top: 0;
+}
+
+/* solid blue inputs like screenshot */
+.input-box input {
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 12px;
+  border-radius: 10px;
+  border: none;
+  background: #3b5998;
+  color: #fff;
+  font-size: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.input-box input::placeholder {
+  color: #d6def6;
+  opacity: 0.9;
+}
+.input-box input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(86, 129, 255, 0.35);
+}
+
+/* right-side icons */
+.input-box .icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  opacity: 0.95;
+}
+
+/* "At least 6 characters" bar styling like a mini input */
+.hint,
+.field-error {
+  display: block;
+  margin: 8px 2px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #3b5998;
+  font-size: 12px;
+  line-height: 1;
+}
+.field-error {
+  background: rgba(255, 95, 95, 0.2);
+  color: #ffd7d7;
+}
+
+/* remember/forgot row */
+.options {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #cfd7ea;
+}
+.options a {
+  color: #d3dcff;
+  text-decoration: none;
+}
+
+/* big pill sign-in button */
+.login-form .button {
+  width: 100%;
+  height: 44px;
+  margin-top: 12px;
+  border-radius: 12px;
+  background: #3b5998;
+  color: #fff;
+  border: none;
+  font-weight: 800;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+.login-form .button:hover {
+  background: #486bb7;
+  transform: translateY(-1px);
+}
+
+/* register link */
+.register-link {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  color: #cfd7ea;
+}
+.register-link a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+/* thin divider centered like screenshot */
+.divider {
+  width: 78%;
+  margin: 12px auto 8px;
+  border: none;
+  border-top: 1px solid rgba(59, 89, 152, 0.9);
+}
+.or-text {
+  text-align: center;
+  font-size: 13px;
+  color: #c7d1ef;
+}
+
+/* raised circular Google button */
+.google-button {
+  background: #fff;
+  border: none;
+  border-radius: 999px;
+  width: 48px;
+  height: 48px;
+  margin: 8px auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #3b5998;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background 0.2s ease;
+}
+.google-button:hover {
+  background: #f0f3ff;
+  transform: translateY(-1px);
 }
 
+/* === DASHBOARD (topic grouping) === */
+.dashboard-page {
+  min-height: 100vh;
+}
+.dashboard-header {
+  position: relative;
+  height: 220px;
+  background: url("bg01.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
 .dashboard-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
 }
-
 .dashboard-header-content {
   position: relative;
   text-align: center;
   z-index: 1;
 }
+.dashboard-header-content h2 {
+  margin: 0 0 10px;
+}
+.muted {
+  opacity: 0.85;
+}
 
-/* Main content area */
+/* Content */
 .dashboard-content {
-  background-color: #1e2d42;
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background: #1e2d42;
+  padding: 2rem clamp(12px, 3vw, 32px) 3rem;
 }
 
+/* Optional: left-align the section title when going full width */
 .dashboard-content h3 {
-  text-align: center;
-  margin-bottom: 1.5rem;
+  margin: 0 0 1rem;
   font-size: 1.8rem;
+  text-align: left; /* was center */
 }
 
-/* Challenge cards */
-.challenge-box {
-  background-color: rgba(39, 58, 85, 0.95);
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+/* Topic section heading spacing */
+.topic-section {
+  margin-top: 22px;
+}
+.topic-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 12px 0 14px;
+  opacity: 0.95;
+  text-align: left; /* keep headings left */
 }
 
-.challenge-footer {
+/* Full-width, responsive grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* max 3 per row */
+  gap: 16px;
+  width: 100%;
+}
+
+/* Controls row: center the block; keep search & filter side-by-side */
+.controls {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
-  margin-top: 12px;
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+.controls.controls--centered {
+  justify-content: center; /* ensure centered when modifier is used */
 }
 
-.start-button {
-  background-color: #3b5998;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
+/* Search */
+.search {
+  width: min(540px, 92vw);
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  outline: none;
+  transition: box-shadow 0.2s ease, background 0.2s ease, border 0.2s ease;
+}
+.search:focus {
+  box-shadow: 0 0 0 3px rgba(72, 127, 255, 0.35);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+/* Topic sections (no A01 badge shown) */
+.topic-section {
+  margin-top: 22px;
+}
+.topic-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  margin: 12px 0 14px;
+  opacity: 0.95;
+}
+
+/* Cards & grid (kept for compatibility; functional grid is the auto-fit one above) */
+@media (max-width: 1100px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr); /* fallback to 2 on medium screens */
+  }
+}
+@media (max-width: 680px) {
+  .card-grid {
+    grid-template-columns: 1fr; /* single column on mobile */
+  }
+}
+
+.ch-card {
+  background: linear-gradient(
+    180deg,
+    rgba(39, 58, 85, 0.9),
+    rgba(29, 44, 66, 0.95)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, border 0.2s ease,
+    background 0.2s ease;
+}
+.ch-card:hover {
+  transform: perspective(800px) rotateX(0.8deg) rotateY(-0.8deg)
+    translateY(-2px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+.ch-card:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(86, 129, 255, 0.35);
+}
+
+.ch-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.ch-title {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* Difficulty chips (correct labels) */
+.sev {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  line-height: 1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+}
+.sev--easy {
+  color: #d9f7ff;
+  background: rgba(66, 200, 255, 0.2);
+  border-color: rgba(90, 220, 255, 0.35);
+}
+.sev--medium {
+  color: #fff0d9;
+  background: rgba(255, 166, 66, 0.2);
+  border-color: rgba(255, 183, 90, 0.35);
+}
+.sev--hard {
+  color: #ffdede;
+  background: rgba(255, 76, 76, 0.2);
+  border-color: rgba(255, 120, 120, 0.35);
+}
+
+.ch-blurb {
+  margin: 6px 0 10px;
+  opacity: 0.95;
+}
+.ch-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.best {
+  opacity: 0.9;
+}
+
+/* Start button on cards (ripple reused) */
+.ripple-circle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.9);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out forwards;
+}
+@keyframes ripple {
+  to {
+    width: 340px;
+    height: 340px;
+    opacity: 0;
+  }
+}
+
+/* Segmented */
+.segmented {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 4px;
+}
+.seg-btn {
+  background: transparent;
+  color: #e8f0ff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+.seg-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.seg-btn--active {
+  background: rgba(255, 255, 255, 0.18);
 }
 
-.start-button:hover {
-  background-color: #ddd;
-  color: #3b5998;
+/* Controls row: centered with search + filter inline */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 16px;
+}
+.controls.controls--centered {
+  justify-content: center;
+}
+.search-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* space between search and segmented buttons */
+  max-width: 900px;
+}
+
+/* Keep the search a nice width; expand on big screens, shrink on small */
+.search {
+  width: min(560px, 76vw);
+}
+
+/* Segmented next to the search */
+.segmented.segmented--inline {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 4px;
+  white-space: nowrap;
+}
+
+.seg-btn {
+  background: transparent;
+  color: #e8f0ff;
+  border: 0;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+.seg-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.seg-btn--active {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Small screens: stack filter under search for usability */
+@media (max-width: 640px) {
+  .search-wrap {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .segmented.segmented--inline {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* new */
+.field-error {
+  color: #ffb7b7;
+  font-size: 12px;
+  margin: 6px 2px 0;
+}
+.hint {
+  color: #c9d7ff;
+  font-size: 12px;
+  margin: 6px 2px 0;
+  opacity: 0.85;
+}
+
+/* eye button inside password field */
+.pw-toggle {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  color: #fff;
+  opacity: 0.9;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.pw-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* loading state */
+.btn--loading {
+  opacity: 0.8;
+  pointer-events: none;
 }

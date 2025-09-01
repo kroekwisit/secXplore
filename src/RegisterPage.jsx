@@ -11,38 +11,52 @@ const RegisterPage = () => {
 
   return (
     <div className="login-page">
+      {/* Navbar (same as Login) */}
       <nav className="navbar">
-        <Link to="/" className="logo">
-          secXplore
+        <Link to="/" className="logo textdecoration_none">
+          <span className="logo-gradient">secXplore</span>
         </Link>
         <ul className="nav-links">
           <Link to="/" className="textdecoration_none">
-            <li>Home</li>
+            <li className="nav-item">
+              <span>Home</span>
+            </li>
           </Link>
-          <li>About us</li>
+          <li className="nav-item">
+            <span>About us</span>
+          </li>
         </ul>
       </nav>
 
+      {/* Reuse the same card template as Login */}
       <div className="login-form">
         <h2>Register</h2>
 
         <div className="input-box">
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Username" autoComplete="username" />
           <FaKeyboard className="icon" />
         </div>
 
         <div className="input-box">
-          <input type="email" placeholder="Email" />
+          <input type="email" placeholder="Email" autoComplete="email" />
           <FaEnvelope className="icon" />
         </div>
 
         <div className="input-box">
-          <input type="password" placeholder="Password" />
+          <input
+            type="password"
+            placeholder="Password"
+            autoComplete="new-password"
+          />
           <FaLock className="icon" />
         </div>
 
         <div className="input-box">
-          <input type="password" placeholder="Confirm Password" />
+          <input
+            type="password"
+            placeholder="Confirm Password"
+            autoComplete="new-password"
+          />
           <FaLock className="icon" />
         </div>
 

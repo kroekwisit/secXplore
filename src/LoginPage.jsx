@@ -11,18 +11,24 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
+      {/* Navbar with same style as Dashboard */}
       <nav className="navbar">
-        <Link to="/" className="logo">
-          secXplore
+        <Link to="/" className="logo textdecoration_none">
+          <span className="logo-gradient">secXplore</span>
         </Link>
         <ul className="nav-links">
           <Link to="/" className="textdecoration_none">
-            <li>Home</li>
+            <li className="nav-item">
+              <span>Home</span>
+            </li>
           </Link>
-          <li>About us</li>
+          <li className="nav-item">
+            <span>About us</span>
+          </li>
         </ul>
       </nav>
 
+      {/* Login form */}
       <div className="login-form">
         <h2>Sign in</h2>
 
