@@ -25,8 +25,7 @@ const MainPage = () => {
       })
     );
 
-    // navigate to Dashboard quickly after ripple
-    setTimeout(() => navigate("/Dashboard"), 180);
+    setTimeout(() => navigate("/login"), 180);
   };
 
   // light parallax on mouse move
