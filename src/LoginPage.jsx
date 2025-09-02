@@ -32,14 +32,16 @@ const LoginPage = () => {
       <div className="login-form">
         <h2>Sign in</h2>
 
+        {/* Username */}
         <div className="input-box">
-          <input type="text" placeholder="Username" />
-          <FaKeyboard className="icon" />
+          <label className="input-label">Username</label>
+          <input type="text" />
         </div>
 
+        {/* Password */}
         <div className="input-box">
-          <input type="password" placeholder="Password" />
-          <FaLock className="icon" />
+          <label className="input-label">Password</label>
+          <input type="password" />
         </div>
 
         <div className="options">
@@ -58,7 +60,7 @@ const LoginPage = () => {
         </div>
 
         <hr className="divider" />
-        <p className="or-text">Or sign up with</p>
+        <p className="or-text">Or sign in with</p>
 
         <button className="google-button">
           <FaGoogle />

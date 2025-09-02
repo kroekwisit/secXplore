@@ -279,8 +279,13 @@ body {
   border-radius: 12px;
 }
 
+.login-form .button.register-btn {
+  width: 100%;
+  height: 50px;
+  margin-top: 40px;
+}
+
 /* === LOGIN === */
-/* === LOGIN (card look like screenshot) === */
 .login-page {
   min-height: 100vh;
   background: #1e2d42;
@@ -310,7 +315,15 @@ body {
 /* field spacing */
 .input-box {
   position: relative;
-  margin-top: 14px;
+  margin-top: 16px;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e6eefc;
 }
 .input-box:first-of-type {
   margin-top: 0;
@@ -335,16 +348,6 @@ body {
 .input-box input:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(86, 129, 255, 0.35);
-}
-
-/* right-side icons */
-.input-box .icon {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #fff;
-  opacity: 0.95;
 }
 
 /* "At least 6 characters" bar styling like a mini input */
@@ -405,6 +408,10 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 700;
+}
+
+.register-btn {
+  margin-top: 20px; /* extra space above button */
 }
 
 /* thin divider centered like screenshot */
@@ -782,4 +789,130 @@ body {
 .btn--loading {
   opacity: 0.8;
   pointer-events: none;
+}
+
+/* === Scoreboard === */
+.lb-wrap {
+  width: 100%;
+  overflow-x: auto;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.lb {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.lb thead th {
+  text-align: left;
+  font-weight: 800;
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.lb-th--sm {
+  width: 40px;
+}
+.lb-td--sm {
+  width: 40px;
+}
+
+.lb tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+
+.lb tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lb-name {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.lb-empty {
+  text-align: center;
+  padding: 16px;
+  color: #cfd7ea;
+}
+
+.lb-me {
+  background: rgba(86, 129, 255, 0.1);
+}
+
+.lb-sort-hint {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 8px;
+  text-align: right;
+}
+
+/* select near search */
+.select-wrap select {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* make controls wrap nicely on small screens */
+@media (max-width: 720px) {
+  .lb thead th:nth-child(6),
+  .lb tbody td:nth-child(6) {
+    display: none;
+  } /* hide 'Topic' on narrow screens */
+}
+
+.lb-wrap--center {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.lb th,
+.lb td {
+  padding: 12px 18px;
+}
+
+.lb-th--sm,
+.lb-td--sm {
+  width: 60px;
+  text-align: center;
+}
+
+.lb thead th:first-child,
+.lb tbody td:first-child {
+  width: 64px; /* tweak if you want */
+  text-align: center !important;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.lb th:nth-child(2),
+.lb td:nth-child(2) {
+  text-align: left; /* Name left-aligned */
+}
+
+.lb th:nth-child(3),
+.lb td:nth-child(3),
+.lb th:nth-child(4),
+.lb td:nth-child(4) {
+  text-align: right; /* Numbers right-aligned */
+}
+
+.lb thead th:first-child,
+.lb tbody td:first-child {
+  width: 64px; /* tweak if you want */
+  text-align: center !important;
+  padding-left: 0;
+  padding-right: 0;
 }

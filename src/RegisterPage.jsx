@@ -1,4 +1,3 @@
-import { FaLock, FaKeyboard, FaEnvelope } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 
@@ -28,39 +27,31 @@ const RegisterPage = () => {
         </ul>
       </nav>
 
-      {/* Reuse the same card template as Login */}
+      {/* Register form (same template as login) */}
       <div className="login-form">
         <h2>Register</h2>
 
         <div className="input-box">
-          <input type="text" placeholder="Username" autoComplete="username" />
-          <FaKeyboard className="icon" />
+          <label className="input-label">Username</label>
+          <input type="text" />
         </div>
 
         <div className="input-box">
-          <input type="email" placeholder="Email" autoComplete="email" />
-          <FaEnvelope className="icon" />
+          <label className="input-label">Email</label>
+          <input type="email" autoComplete="email" />
         </div>
 
         <div className="input-box">
-          <input
-            type="password"
-            placeholder="Password"
-            autoComplete="new-password"
-          />
-          <FaLock className="icon" />
+          <label className="input-label">Password</label>
+          <input type="password" />
         </div>
 
         <div className="input-box">
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            autoComplete="new-password"
-          />
-          <FaLock className="icon" />
+          <label className="input-label">Confirm Password</label>
+          <input type="password" />
         </div>
 
-        <button className="button" onClick={handleRegisterClick}>
+        <button className="button register-btn" onClick={handleRegisterClick}>
           Create Account
         </button>
 

@@ -54,8 +54,11 @@ const MainPage = () => {
               </li>
             </Link>
             <li className="nav-item">
-              <span>Scoreboard</span>
+              <Link to="/scoreboard" className="textdecoration_none">
+                <span>Scoreboard</span>
+              </Link>
             </li>
+
             <li className="nav-item">
               <span>About us</span>
             </li>

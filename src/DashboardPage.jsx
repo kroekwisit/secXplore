@@ -299,9 +299,11 @@ const DashboardPage = () => {
               <span>Home</span>
             </li>
           </Link>
-          <li className="nav-item">
-            <span>Scoreboard</span>
-          </li>
+          <Link to="/scoreboard" className="textdecoration_none">
+            <li className="nav-item">
+              <span>Scoreboard</span>
+            </li>
+          </Link>
           <li className="nav-item">
             <span>About us</span>
           </li>
