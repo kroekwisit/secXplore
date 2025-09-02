@@ -1,7 +1,10 @@
-/* === RESET & BASE === */
+/* =========================================================
+   1) RESET & BASE
+   ========================================================= */
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   margin: 0;
@@ -16,12 +19,16 @@ body {
     #152236 100%
   );
 }
+
+/* Utilities */
 .textdecoration_none {
   text-decoration: none;
   color: inherit;
 }
 
-/* === NAVBAR (shared) === */
+/* =========================================================
+   2) NAVBAR (shared)
+   ========================================================= */
 .navbar {
   position: sticky;
   width: 100%;
@@ -53,6 +60,7 @@ body {
     filter: drop-shadow(0 0 12px rgba(160, 190, 255, 0.35));
   }
 }
+
 .nav-right {
   display: flex;
   align-items: center;
@@ -94,6 +102,7 @@ body {
 .nav-item:hover::after {
   transform: scaleX(1);
 }
+
 .sign-in-button {
   background: #fff;
   color: #274777;
@@ -109,7 +118,9 @@ body {
   transform: translateY(-1px);
 }
 
-/* === MAIN PAGE: HERO === */
+/* =========================================================
+   3) MAIN PAGE — HERO & OWASP TEXT
+   ========================================================= */
 .hero {
   --mx: 0;
   --my: 0;
@@ -145,7 +156,7 @@ body {
   color: #e6eefc;
   opacity: 0.95;
 }
-/* optional typing effect – remove .type-mask on the element to disable */
+/* typing effect (optional) */
 .type-mask {
   --steps: 40;
   white-space: nowrap;
@@ -166,7 +177,7 @@ body {
   }
 }
 
-/* Start button */
+/* Start button (hero-specific) */
 .start-button {
   position: relative;
   overflow: hidden;
@@ -178,7 +189,6 @@ body {
   color: #fff;
   font-weight: 800;
   letter-spacing: 0.2px;
-
   transition: transform 0.12s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 .start-button:hover {
@@ -189,16 +199,12 @@ body {
 .start-button:active {
   transform: translateY(0);
 }
-.ripple-circle {
-  position: absolute;
+/* larger ripple for hero button */
+.start-button .ripple-circle {
   width: 10px;
   height: 10px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -50%);
-  animation: ripple 0.6s ease-out forwards;
 }
-@keyframes ripple {
+@keyframes ripple-hero {
   to {
     width: 360px;
     height: 360px;
@@ -206,7 +212,7 @@ body {
   }
 }
 
-/* === MAIN PAGE: OWASP LIST (plain text) === */
+/* OWASP list (plain text) */
 .owasp-list {
   text-align: center;
   padding: 2rem 1rem;
@@ -233,7 +239,9 @@ body {
   margin: 0;
 }
 
-/* Generic button (used on dashboard cards, etc.) */
+/* =========================================================
+   4) BUTTONS & RIPPLE (global)
+   ========================================================= */
 .button {
   position: relative;
   overflow: hidden; /* keep ripple contained */
@@ -242,17 +250,16 @@ body {
   font-weight: 800;
   cursor: pointer;
   border: none;
-  background: #3b5998; /* solid flat blue */
+  background: #3b5998;
   color: #fff;
   transition: background 0.2s ease, transform 0.1s ease;
 }
-
 .button:hover {
-  background: #2e4679; /* subtle darken, no glow */
+  background: #2e4679;
   transform: translateY(-1px);
 }
 
-/* Ripple animation (still active) */
+/* shared ripple */
 .ripple-circle {
   position: absolute;
   width: 8px;
@@ -262,7 +269,6 @@ body {
   transform: translate(-50%, -50%);
   animation: ripple 0.6s ease-out forwards;
 }
-
 @keyframes ripple {
   to {
     width: 340px;
@@ -271,21 +277,9 @@ body {
   }
 }
 
-/* Login form button (full-width, same flat style) */
-.login-form .button {
-  width: 100%;
-  height: 44px;
-  margin-top: 12px;
-  border-radius: 12px;
-}
-
-.login-form .button.register-btn {
-  width: 100%;
-  height: 50px;
-  margin-top: 40px;
-}
-
-/* === LOGIN === */
+/* =========================================================
+   5) AUTH PAGES — Login & Register
+   ========================================================= */
 .login-page {
   min-height: 100vh;
   background: #1e2d42;
@@ -299,11 +293,10 @@ body {
   align-self: center;
   padding: 28px 26px;
   border-radius: 14px;
-  background: #25374f; /* darker card face */
+  background: #25374f;
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
 }
-
 .login-form h2 {
   text-align: center;
   margin: 2px 0 18px;
@@ -312,12 +305,14 @@ body {
   font-weight: 800;
 }
 
-/* field spacing */
+/* Field group */
 .input-box {
   position: relative;
   margin-top: 16px;
 }
-
+.input-box:first-of-type {
+  margin-top: 0;
+}
 .input-label {
   display: block;
   margin-bottom: 6px;
@@ -325,15 +320,12 @@ body {
   font-weight: 600;
   color: #e6eefc;
 }
-.input-box:first-of-type {
-  margin-top: 0;
-}
 
-/* solid blue inputs like screenshot */
+/* Inputs */
 .input-box input {
   width: 100%;
   height: 44px;
-  padding: 0 44px 0 12px;
+  padding: 0 12px;
   border-radius: 10px;
   border: none;
   background: #3b5998;
@@ -350,7 +342,7 @@ body {
   box-shadow: 0 0 0 3px rgba(86, 129, 255, 0.35);
 }
 
-/* "At least 6 characters" bar styling like a mini input */
+/* Hints & errors */
 .hint,
 .field-error {
   display: block;
@@ -366,7 +358,7 @@ body {
   color: #ffd7d7;
 }
 
-/* remember/forgot row */
+/* Remember / Forgot row */
 .options {
   margin-top: 10px;
   display: flex;
@@ -380,7 +372,7 @@ body {
   text-decoration: none;
 }
 
-/* big pill sign-in button */
+/* Auth primary button */
 .login-form .button {
   width: 100%;
   height: 44px;
@@ -397,7 +389,13 @@ body {
   transform: translateY(-1px);
 }
 
-/* register link */
+/* Register page: extra gap above "Create Account" */
+.login-form .button.register-btn {
+  margin-top: 30px;
+  height: 50px;
+}
+
+/* Register / Login links & dividers */
 .register-link {
   margin-top: 10px;
   font-size: 13px;
@@ -410,11 +408,6 @@ body {
   font-weight: 700;
 }
 
-.register-btn {
-  margin-top: 20px; /* extra space above button */
-}
-
-/* thin divider centered like screenshot */
 .divider {
   width: 78%;
   margin: 12px auto 8px;
@@ -427,7 +420,7 @@ body {
   color: #c7d1ef;
 }
 
-/* raised circular Google button */
+/* Social button */
 .google-button {
   background: #fff;
   border: none;
@@ -448,10 +441,35 @@ body {
   transform: translateY(-1px);
 }
 
-/* === DASHBOARD (topic grouping) === */
+/* Optional: password eye toggle (keep for future use) */
+.pw-toggle {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  color: #fff;
+  opacity: 0.9;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+}
+.pw-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.btn--loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* =========================================================
+   6) DASHBOARD — Header, Content, Cards & Controls
+   ========================================================= */
 .dashboard-page {
   min-height: 100vh;
 }
+
 .dashboard-header {
   position: relative;
   height: 220px;
@@ -478,7 +496,6 @@ body {
   opacity: 0.85;
 }
 
-/* Content */
 .dashboard-content {
   width: 100%;
   max-width: none;
@@ -486,15 +503,13 @@ body {
   background: #1e2d42;
   padding: 2rem clamp(12px, 3vw, 32px) 3rem;
 }
-
-/* Optional: left-align the section title when going full width */
 .dashboard-content h3 {
   margin: 0 0 1rem;
   font-size: 1.8rem;
-  text-align: left; /* was center */
+  text-align: left;
 }
 
-/* Topic section heading spacing */
+/* Topic sections */
 .topic-section {
   margin-top: 22px;
 }
@@ -504,71 +519,28 @@ body {
   letter-spacing: 0.2px;
   margin: 12px 0 14px;
   opacity: 0.95;
-  text-align: left; /* keep headings left */
+  text-align: left;
 }
 
-/* Full-width, responsive grid */
+/* Card grid: max 3 per row, responsive */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* max 3 per row */
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   width: 100%;
 }
-
-/* Controls row: center the block; keep search & filter side-by-side */
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin: 4px 0 16px;
-}
-.controls.controls--centered {
-  justify-content: center; /* ensure centered when modifier is used */
-}
-
-/* Search */
-.search {
-  width: min(540px, 92vw);
-  height: 42px;
-  padding: 0 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  outline: none;
-  transition: box-shadow 0.2s ease, background 0.2s ease, border 0.2s ease;
-}
-.search:focus {
-  box-shadow: 0 0 0 3px rgba(72, 127, 255, 0.35);
-  background: rgba(255, 255, 255, 0.09);
-}
-
-/* Topic sections (no A01 badge shown) */
-.topic-section {
-  margin-top: 22px;
-}
-.topic-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 0.2px;
-  margin: 12px 0 14px;
-  opacity: 0.95;
-}
-
-/* Cards & grid (kept for compatibility; functional grid is the auto-fit one above) */
 @media (max-width: 1100px) {
   .card-grid {
-    grid-template-columns: repeat(2, 1fr); /* fallback to 2 on medium screens */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 680px) {
   .card-grid {
-    grid-template-columns: 1fr; /* single column on mobile */
+    grid-template-columns: 1fr;
   }
 }
 
+/* Challenge cards */
 .ch-card {
   background: linear-gradient(
     180deg,
@@ -605,8 +577,22 @@ body {
   margin: 0;
   font-size: 1.05rem;
 }
+.ch-blurb {
+  margin: 6px 0 10px;
+  opacity: 0.95;
+}
+.ch-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.best {
+  opacity: 0.9;
+}
 
-/* Difficulty chips (correct labels) */
+/* Difficulty chips */
 .sev {
   display: inline-flex;
   align-items: center;
@@ -633,40 +619,35 @@ body {
   border-color: rgba(255, 120, 120, 0.35);
 }
 
-.ch-blurb {
-  margin: 6px 0 10px;
-  opacity: 0.95;
-}
-.ch-meta {
+/* Controls (search & segmented) */
+.controls {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 16px;
 }
-.best {
-  opacity: 0.9;
-}
-
-/* Start button on cards (ripple reused) */
-.ripple-circle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.9);
-  transform: translate(-50%, -50%);
-  animation: ripple 0.6s ease-out forwards;
-}
-@keyframes ripple {
-  to {
-    width: 340px;
-    height: 340px;
-    opacity: 0;
-  }
+.controls.controls--centered {
+  justify-content: center;
 }
 
-/* Segmented */
+.search {
+  width: min(560px, 92vw);
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  outline: none;
+  transition: box-shadow 0.2s, background 0.2s, border 0.2s;
+}
+.search:focus {
+  box-shadow: 0 0 0 3px rgba(72, 127, 255, 0.35);
+  background: rgba(255, 255, 255, 0.09);
+}
+
 .segmented {
   display: inline-flex;
   background: rgba(255, 255, 255, 0.08);
@@ -691,58 +672,18 @@ body {
   background: rgba(255, 255, 255, 0.18);
 }
 
-/* Controls row: centered with search + filter inline */
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin: 4px 0 16px;
-}
-.controls.controls--centered {
-  justify-content: center;
-}
+/* Search + segmented inline wrapper */
 .search-wrap {
   display: inline-flex;
   align-items: center;
-  gap: 10px; /* space between search and segmented buttons */
+  gap: 10px;
   max-width: 900px;
 }
-
-/* Keep the search a nice width; expand on big screens, shrink on small */
-.search {
-  width: min(560px, 76vw);
-}
-
-/* Segmented next to the search */
 .segmented.segmented--inline {
-  display: inline-flex;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 12px;
-  padding: 4px;
   white-space: nowrap;
 }
 
-.seg-btn {
-  background: transparent;
-  color: #e8f0ff;
-  border: 0;
-  padding: 8px 14px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 700;
-  transition: background 0.2s ease;
-}
-.seg-btn:hover {
-  background: rgba(255, 255, 255, 0.06);
-}
-.seg-btn--active {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-/* Small screens: stack filter under search for usability */
+/* Stack filter under search on small screens */
 @media (max-width: 640px) {
   .search-wrap {
     flex-direction: column;
@@ -754,44 +695,9 @@ body {
   }
 }
 
-/* new */
-.field-error {
-  color: #ffb7b7;
-  font-size: 12px;
-  margin: 6px 2px 0;
-}
-.hint {
-  color: #c9d7ff;
-  font-size: 12px;
-  margin: 6px 2px 0;
-  opacity: 0.85;
-}
-
-/* eye button inside password field */
-.pw-toggle {
-  position: absolute;
-  right: 44px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: 0;
-  color: #fff;
-  opacity: 0.9;
-  cursor: pointer;
-  padding: 6px;
-  border-radius: 8px;
-}
-.pw-toggle:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* loading state */
-.btn--loading {
-  opacity: 0.8;
-  pointer-events: none;
-}
-
-/* === Scoreboard === */
+/* =========================================================
+   7) SCOREBOARD
+   ========================================================= */
 .lb-wrap {
   width: 100%;
   overflow-x: auto;
@@ -800,119 +706,88 @@ body {
   border-radius: 12px;
   padding: 10px;
 }
-
-.lb {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-.lb thead th {
-  text-align: left;
-  font-weight: 800;
-  padding: 12px 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.lb-th--sm {
-  width: 40px;
-}
-.lb-td--sm {
-  width: 40px;
-}
-
-.lb tbody td {
-  padding: 12px 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  vertical-align: middle;
-}
-
-.lb tbody tr:hover {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.lb-name {
-  font-weight: 700;
-  letter-spacing: 0.2px;
-}
-
-.lb-empty {
-  text-align: center;
-  padding: 16px;
-  color: #cfd7ea;
-}
-
-.lb-me {
-  background: rgba(86, 129, 255, 0.1);
-}
-
-.lb-sort-hint {
-  font-size: 12px;
-  opacity: 0.8;
-  margin-top: 8px;
-  text-align: right;
-}
-
-/* select near search */
-.select-wrap select {
-  background: rgba(255, 255, 255, 0.06);
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  padding: 8px 10px;
-}
-
-/* make controls wrap nicely on small screens */
-@media (max-width: 720px) {
-  .lb thead th:nth-child(6),
-  .lb tbody td:nth-child(6) {
-    display: none;
-  } /* hide 'Topic' on narrow screens */
-}
-
 .lb-wrap--center {
   max-width: 1000px;
   margin: 0 auto;
   text-align: left;
 }
 
+.lb {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  table-layout: fixed;
+}
 .lb th,
 .lb td {
-  padding: 12px 18px;
+  padding: 12px 20px;
 }
 
+/* Headers */
+.lb thead th {
+  text-align: left;
+  font-weight: 800;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap; /* no sort here; pointer removed */
+}
+
+/* Rank column */
 .lb-th--sm,
 .lb-td--sm {
   width: 60px;
   text-align: center;
 }
-
 .lb thead th:first-child,
 .lb tbody td:first-child {
-  width: 64px; /* tweak if you want */
+  width: 64px;
   text-align: center !important;
   padding-left: 0;
   padding-right: 0;
 }
 
+/* Column alignment */
 .lb th:nth-child(2),
 .lb td:nth-child(2) {
-  text-align: left; /* Name left-aligned */
-}
-
+  text-align: left;
+} /* Name */
 .lb th:nth-child(3),
 .lb td:nth-child(3),
 .lb th:nth-child(4),
 .lb td:nth-child(4) {
-  text-align: right; /* Numbers right-aligned */
+  text-align: right;
+} /* Points & Solved */
+
+/* Rows */
+.lb tbody td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  vertical-align: middle;
+}
+.lb tbody tr:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.lb-name {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+.lb-empty {
+  text-align: center;
+  padding: 16px;
+  color: #cfd7ea;
+}
+.lb-me {
+  background: rgba(86, 129, 255, 0.1);
 }
 
-.lb thead th:first-child,
-.lb tbody td:first-child {
-  width: 64px; /* tweak if you want */
-  text-align: center !important;
-  padding-left: 0;
-  padding-right: 0;
+/* Two-tone zebra striping */
+.lb tbody tr:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.04);
 }
+.lb tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Responsive table trims (if you later add topic/difficulty cols again)
+@media (max-width: 720px) {
+  .lb thead th:nth-child(6), .lb tbody td:nth-child(6) { display: none; }
+}
+*/

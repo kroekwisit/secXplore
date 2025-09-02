@@ -53,15 +53,13 @@ const ScoreboardPage = () => {
       <div className="dashboard-header">
         <div className="dashboard-overlay" />
         <div className="dashboard-header-content">
-          <h2>Scoreboard</h2>
+          <h1>Scoreboard</h1>
           <p className="muted">Ranked by points</p>
         </div>
       </div>
 
       {/* Content */}
       <div className="dashboard-content">
-        <h3>Leaderboard</h3>
-
         <div className="lb-wrap lb-wrap--center">
           <table className="lb">
             <thead>

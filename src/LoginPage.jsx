@@ -1,12 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FaKeyboard, FaLock, FaGoogle } from "react-icons/fa";
 import "./style.css";
+import { useState } from "react";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const [ripple, setRipple] = useState({ show: false, x: 0, y: 0 });
 
-  const handleLoginClick = () => {
-    navigate("/Dashboard");
+  const handleLoginClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setRipple({
+      show: false,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+    requestAnimationFrame(() =>
+      setRipple({
+        show: true,
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      })
+    );
+
+    setTimeout(() => navigate("/Dashboard"), 160);
   };
 
   return (
@@ -31,19 +47,16 @@ const LoginPage = () => {
       {/* Login form */}
       <div className="login-form">
         <h2>Sign in</h2>
-
         {/* Username */}
         <div className="input-box">
           <label className="input-label">Username</label>
           <input type="text" />
         </div>
-
         {/* Password */}
         <div className="input-box">
           <label className="input-label">Password</label>
           <input type="password" />
         </div>
-
         <div className="options">
           <label>
             <input type="checkbox" /> Remember me
@@ -52,16 +65,20 @@ const LoginPage = () => {
         </div>
 
         <button className="button" onClick={handleLoginClick}>
-          Sign in
+          <span>Sign in</span>
+          {ripple.show && (
+            <span
+              className="ripple-circle"
+              style={{ left: ripple.x, top: ripple.y }}
+            />
+          )}
         </button>
 
         <div className="register-link">
           Don’t have an account? <Link to="/Register">Create Account</Link>
         </div>
-
         <hr className="divider" />
         <p className="or-text">Or sign in with</p>
-
         <button className="google-button">
           <FaGoogle />
         </button>

@@ -1,11 +1,27 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
+import { useState } from "react";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
+  const [ripple, setRipple] = useState({ show: false, x: 0, y: 0 });
 
-  const handleRegisterClick = () => {
-    navigate("/Dashboard");
+  const handleRegisterClick = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setRipple({
+      show: false,
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+    requestAnimationFrame(() =>
+      setRipple({
+        show: true,
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      })
+    );
+
+    setTimeout(() => navigate("/Dashboard"), 160);
   };
 
   return (
@@ -52,7 +68,13 @@ const RegisterPage = () => {
         </div>
 
         <button className="button register-btn" onClick={handleRegisterClick}>
-          Create Account
+          <span>Create Account</span>
+          {ripple.show && (
+            <span
+              className="ripple-circle"
+              style={{ left: ripple.x, top: ripple.y }}
+            />
+          )}
         </button>
 
         <div className="register-link">
