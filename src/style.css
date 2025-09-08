@@ -791,3 +791,154 @@ body {
   .lb thead th:nth-child(6), .lb tbody td:nth-child(6) { display: none; }
 }
 */
+
+/* Admin actions row (title + button) */
+.admin-actions {
+  display: flex;
+  flex-direction: column; /* stack title + button */
+  align-items: center; /* center horizontally */
+  text-align: center;
+  margin-bottom: 32px; /* space before Challenge Selection */
+}
+
+.admin-title {
+  margin: 0 0 12px; /* small space below title */
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.add-btn {
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 22, 0.65);
+  backdrop-filter: blur(2px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.modal-panel {
+  max-width: 820px;
+  background: #25374f;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 20px 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+}
+
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 180px; /* Topic / Key / Difficulty */
+  gap: 14px;
+  margin-bottom: 8px;
+}
+@media (max-width: 720px) {
+  .modal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Disable hover wiggle on modal card */
+.ch-card.no-hover {
+  cursor: default;
+}
+.ch-card.no-hover:hover {
+  transform: none;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+/* Optional: ghost button reused (ensure it's in your CSS) */
+.ghost {
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 800;
+  cursor: pointer;
+  background: transparent;
+  color: #cfe0ff;
+  border: 1px solid rgba(140, 170, 255, 0.35);
+  transition: transform 0.1s ease, background 0.2s ease, border 0.2s ease;
+}
+.ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+/* Inputs/select inside modal columns */
+.modal-grid .input-box {
+  margin-top: 0;
+}
+.modal-grid .input-box input,
+.modal-select {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  border-radius: 10px;
+  border: none;
+  background: #3b5998;
+  color: #fff;
+  padding: 0 12px;
+  font-size: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.modal-grid .input-box input:focus,
+.modal-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(86, 129, 255, 0.35);
+}
+
+.modal-title {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px; /* space between Add Challenge and Cancel */
+  margin-top: 14px;
+}
+
+/* Optional ghost button style to contrast */
+.button.ghost {
+  background: transparent;
+  color: #cfe0ff;
+  border: 1px solid rgba(140, 170, 255, 0.35);
+}
+.button.ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* plain, non-highlighted logout button */
+.logout-link {
+  background: transparent;
+  color: #e6eefc; /* matches your nav text */
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* no highlight on hover */
+.logout-link:hover,
+.logout-link:focus {
+  background: transparent;
+  transform: none;
+  text-decoration: none; /* or 'underline' if you want a hint */
+  outline: none;
+}

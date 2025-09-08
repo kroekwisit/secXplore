@@ -2,15 +2,9 @@ import React, { useMemo, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 
-/**
- * Data model:
- * - topicKey: keeps OWASP ordering if you want (A01..A10), but we don't show it in UI
- * - topic: topic header shown to users
- * - difficulty: "Easy" | "Medium" | "Hard"
- * - id: must be unique; Start -> /challenge{id}
- */
-const CHALLENGES = [
-  // A01 Broken Access Control — includes a new Hard item as requested
+/** Seed challenges (deduped) */
+const SEED_CHALLENGES = [
+  // A01
   {
     id: 1,
     topicKey: "A01",
@@ -47,14 +41,6 @@ const CHALLENGES = [
   },
 
   // A02
-  {
-    id: 201,
-    topicKey: "A02",
-    topic: "Cryptographic Failures",
-    title: "Weak Hash Disclosure",
-    difficulty: "Medium",
-    blurb: "Spot plaintext secrets or MD5 hashes in transit.",
-  },
   {
     id: 201,
     topicKey: "A02",
@@ -145,7 +131,6 @@ const CHALLENGES = [
   },
 ];
 
-// Optional fixed order by OWASP; we won't display the key, just use it to order sections
 const TOPIC_ORDER = [
   "A01",
   "A02",
@@ -159,10 +144,45 @@ const TOPIC_ORDER = [
   "A10",
 ];
 
+function getInitialChallenges() {
+  try {
+    const saved = JSON.parse(
+      localStorage.getItem("sx_challenges_custom") || "[]"
+    );
+    return [...SEED_CHALLENGES, ...saved];
+  } catch {
+    return [...SEED_CHALLENGES];
+  }
+}
+
 const DashboardPage = () => {
   const navigate = useNavigate();
 
-  // Optional best times (persist)
+  /** ---------- AUTH GUARD ---------- */
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    try {
+      const u = JSON.parse(localStorage.getItem("user") || "null");
+      if (!u) {
+        navigate("/login", { replace: true });
+        return;
+      }
+      setUser(u);
+    } catch {
+      navigate("/login", { replace: true });
+    }
+  }, [navigate]);
+
+  /** ---------- STATE ---------- */
+  const [challenges, setChallenges] = useState(getInitialChallenges);
+
+  // topics derived from current challenge list (for admin add dropdown)
+  const TOPICS = useMemo(
+    () => Array.from(new Set(challenges.map((c) => c.topic))).sort(),
+    [challenges]
+  );
+
+  // Best times
   const [bestTimes, setBestTimes] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("sx_bestTimes") || "{}");
@@ -170,18 +190,41 @@ const DashboardPage = () => {
       return {};
     }
   });
-  useEffect(
-    () => localStorage.setItem("sx_bestTimes", JSON.stringify(bestTimes)),
-    [bestTimes]
-  );
+  useEffect(() => {
+    localStorage.setItem("sx_bestTimes", JSON.stringify(bestTimes));
+  }, [bestTimes]);
 
-  // Search + difficulty filter
+  // Filters
   const [q, setQ] = useState("");
-  const [diffFilter, setDiffFilter] = useState(null); // null = show all
+  const [diffFilter, setDiffFilter] = useState(null); // null => show all
 
-  // Ripple state
+  // Ripple
   const [ripple, setRipple] = useState({ show: false, x: 0, y: 0, id: null });
 
+  // Admin modal
+  const [showAdminModal, setShowAdminModal] = useState(false);
+  const openAdminModal = () => setShowAdminModal(true);
+  const closeAdminModal = () => setShowAdminModal(false);
+
+  // Logout confirm modal
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const handleLogoutConfirm = () => {
+    localStorage.removeItem("user");
+    navigate("/", { replace: true });
+  };
+
+  // Admin form (no topicKey here—derived on submit)
+  const [form, setForm] = useState({
+    topic: TOPICS[0] || "Broken Access Control",
+    difficulty: "Easy",
+    title: "",
+    blurb: "",
+  });
+  const [adminMsg, setAdminMsg] = useState("");
+
+  const isAdmin = user?.role === "admin";
+
+  /** ---------- HELPERS ---------- */
   const fmt = (ms) => {
     if (ms == null || !isFinite(ms)) return "—";
     const s = Math.floor(ms / 1000);
@@ -190,10 +233,10 @@ const DashboardPage = () => {
     return `${mm}:${ss}`;
   };
 
-  // Filter then group by topicKey (header shows only the topic name)
+  /** ---------- FILTER/GROUP ---------- */
   const groupedByTopic = useMemo(() => {
     const term = q.trim().toLowerCase();
-    const filtered = CHALLENGES.filter(
+    const filtered = challenges.filter(
       (c) =>
         (!term ||
           c.title.toLowerCase().includes(term) ||
@@ -203,14 +246,12 @@ const DashboardPage = () => {
         (!diffFilter || c.difficulty === diffFilter)
     );
 
-    // group
     const map = new Map();
     for (const item of filtered) {
       if (!map.has(item.topicKey)) map.set(item.topicKey, []);
       map.get(item.topicKey).push(item);
     }
 
-    // sort inside a topic: Easy → Medium → Hard → then by id
     const order = { Easy: 0, Medium: 1, Hard: 2 };
     for (const [k, arr] of map.entries()) {
       arr.sort(
@@ -219,8 +260,9 @@ const DashboardPage = () => {
       map.set(k, arr);
     }
     return map;
-  }, [q, diffFilter]);
+  }, [q, diffFilter, challenges]);
 
+  /** ---------- EVENTS ---------- */
   const handleStartClick = (e, id) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setRipple({
@@ -229,14 +271,14 @@ const DashboardPage = () => {
       y: e.clientY - rect.top,
       id,
     });
-    requestAnimationFrame(() =>
+    requestAnimationFrame(() => {
       setRipple({
         show: true,
         x: e.clientX - rect.left,
         y: e.clientY - rect.top,
         id,
-      })
-    );
+      });
+    });
     setTimeout(() => navigate(`/challenge${id}`), 160);
   };
 
@@ -245,10 +287,48 @@ const DashboardPage = () => {
     setDiffFilter((prev) => (prev === value ? null : value));
   };
 
+  // Add challenge (derive topicKey from existing topic or fallback)
+  const addChallenge = (e) => {
+    e.preventDefault();
+    const { topic, difficulty, title, blurb } = form;
+
+    if (!title.trim() || !blurb.trim() || !topic.trim()) {
+      setAdminMsg("Please fill in all fields.");
+      return;
+    }
+
+    const derivedTopicKey =
+      challenges.find((c) => c.topic === topic)?.topicKey || "CUSTOM";
+
+    const newItem = {
+      id: Date.now(),
+      topicKey: derivedTopicKey,
+      topic: topic.trim(),
+      title: title.trim(),
+      difficulty, // "Easy" | "Medium" | "Hard"
+      blurb: blurb.trim(),
+    };
+
+    const next = [...challenges, newItem];
+    setChallenges(next);
+
+    // Persist only custom items
+    const customOnly = next.filter(
+      (c) => !SEED_CHALLENGES.some((s) => s.id === c.id)
+    );
+    localStorage.setItem("sx_challenges_custom", JSON.stringify(customOnly));
+
+    setAdminMsg("Challenge added.");
+    setForm((f) => ({ ...f, title: "", blurb: "" }));
+    setTimeout(() => setAdminMsg(""), 1500);
+    closeAdminModal();
+  };
+
+  /** ---------- RENDER ---------- */
   const renderTopic = (topicKey) => {
     const list = groupedByTopic.get(topicKey);
     if (!list || list.length === 0) return null;
-    const topicName = list[0].topic; // display only the name
+    const topicName = list[0].topic;
     return (
       <section className="topic-section" key={topicKey}>
         <h4 className="topic-title">{topicName}</h4>
@@ -293,24 +373,40 @@ const DashboardPage = () => {
         <Link to="/" className="logo textdecoration_none">
           <span className="logo-gradient">secXplore</span>
         </Link>
-        <ul className="nav-links">
-          <Link to="/" className="textdecoration_none">
+
+        <div className="nav-right">
+          <ul className="nav-links">
+            <Link to="/" className="textdecoration_none">
+              <li className="nav-item">
+                <span>Home</span>
+              </li>
+            </Link>
+            <Link to="/scoreboard" className="textdecoration_none">
+              <li className="nav-item">
+                <span>Scoreboard</span>
+              </li>
+            </Link>
             <li className="nav-item">
-              <span>Home</span>
+              <span>About us</span>
             </li>
-          </Link>
-          <Link to="/scoreboard" className="textdecoration_none">
             <li className="nav-item">
-              <span>Scoreboard</span>
+              <span>Account</span>
             </li>
-          </Link>
-          <li className="nav-item">
-            <span>About us</span>
-          </li>
-          <li className="nav-item">
-            <span>Account</span>
-          </li>
-        </ul>
+            {/* Logout as plain nav item with confirm modal */}
+            <li
+              className="nav-item"
+              onClick={() => setShowLogoutConfirm(true)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ")
+                  setShowLogoutConfirm(true);
+              }}
+            >
+              <span>Log out</span>
+            </li>
+          </ul>
+        </div>
       </nav>
 
       {/* Header */}
@@ -318,7 +414,11 @@ const DashboardPage = () => {
         <div className="dashboard-overlay" />
         <div className="dashboard-header-content">
           <h2>
-            Welcome Back! <span className="muted">[Username]</span>
+            Welcome Back!{" "}
+            <span className="muted">
+              [{user?.username ?? "Username"}
+              {isAdmin ? " • Admin" : ""}]
+            </span>
           </h2>
           <p>
             Select a topic, then pick a question (difficulty shown on each
@@ -329,6 +429,122 @@ const DashboardPage = () => {
 
       {/* Content */}
       <div className="dashboard-content">
+        {/* Admin actions (centered block) */}
+        {isAdmin && (
+          <section className="topic-section" style={{ marginTop: 0 }}>
+            <div className="admin-actions">
+              <h3 className="admin-title">For Admin JubJub</h3>
+              <button
+                type="button"
+                className="button add-btn"
+                onClick={openAdminModal}
+                aria-haspopup="dialog"
+                aria-expanded={showAdminModal}
+              >
+                Add new question
+              </button>
+            </div>
+          </section>
+        )}
+
+        {/* Admin Add Challenge Modal */}
+        {isAdmin && showAdminModal && (
+          <div
+            className="modal-backdrop"
+            role="dialog"
+            aria-modal="true"
+            onClick={closeAdminModal}
+          >
+            <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+              <h3 className="modal-title">Add a new challenge</h3>
+
+              <form onSubmit={addChallenge}>
+                <div className="modal-grid">
+                  {/* Topic dropdown */}
+                  <div className="input-box" style={{ marginTop: 0 }}>
+                    <label className="input-label">Topic</label>
+                    <select
+                      className="modal-select"
+                      value={form.topic}
+                      onChange={(e) =>
+                        setForm({ ...form, topic: e.target.value })
+                      }
+                    >
+                      {TOPICS.map((t) => (
+                        <option key={t} value={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {/* Difficulty dropdown */}
+                  <div className="input-box" style={{ marginTop: 0 }}>
+                    <label className="input-label">Difficulty</label>
+                    <select
+                      className="modal-select"
+                      value={form.difficulty}
+                      onChange={(e) =>
+                        setForm({ ...form, difficulty: e.target.value })
+                      }
+                    >
+                      <option value="Easy">Easy</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Hard">Hard</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Title */}
+                <div className="input-box">
+                  <label className="input-label">Title</label>
+                  <input
+                    type="text"
+                    placeholder="Short title"
+                    value={form.title}
+                    onChange={(e) =>
+                      setForm({ ...form, title: e.target.value })
+                    }
+                  />
+                </div>
+
+                {/* Blurb */}
+                <div className="input-box">
+                  <label className="input-label">Blurb</label>
+                  <input
+                    type="text"
+                    placeholder="One sentence description"
+                    value={form.blurb}
+                    onChange={(e) =>
+                      setForm({ ...form, blurb: e.target.value })
+                    }
+                  />
+                </div>
+
+                {adminMsg && (
+                  <div className="hint" style={{ marginTop: 8 }}>
+                    {adminMsg}
+                  </div>
+                )}
+
+                {/* Buttons with spacing */}
+                <div className="btn-row">
+                  <button type="submit" className="button">
+                    Add Challenge
+                  </button>
+                  <button
+                    type="button"
+                    className="button ghost"
+                    onClick={closeAdminModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+
         <h3>Challenge Selection</h3>
 
         {/* Controls: centered search with difficulty on its right */}
@@ -346,6 +562,7 @@ const DashboardPage = () => {
               {["Easy", "Medium", "Hard"].map((d) => (
                 <button
                   key={d}
+                  type="button"
                   className={`seg-btn ${
                     diffFilter === d ? "seg-btn--active" : ""
                   }`}
@@ -359,14 +576,56 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Topics in OWASP order; header shows only topic name */}
-        {TOPIC_ORDER.map(renderTopic)}
+        {/* Topics in known OWASP order */}
+        {TOPIC_ORDER.map((k) => renderTopic(k))}
+
+        {/* Custom topics (not in TOPIC_ORDER) */}
+        {[
+          ...new Set(
+            Array.from(groupedByTopic.keys()).filter(
+              (k) => !TOPIC_ORDER.includes(k)
+            )
+          ),
+        ].map((k) => renderTopic(k))}
 
         {/* Empty state */}
-        {TOPIC_ORDER.every(
-          (k) => !groupedByTopic.get(k) || groupedByTopic.get(k).length === 0
+        {Array.from(groupedByTopic.values()).every(
+          (arr) => !arr || arr.length === 0
         ) && <div className="empty">No challenges match your search.</div>}
       </div>
+
+      {/* Logout confirmation modal */}
+      {showLogoutConfirm && (
+        <div
+          className="modal-backdrop"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setShowLogoutConfirm(false)}
+        >
+          <div className="modal-panel" onClick={(e) => e.stopPropagation()}>
+            <h3 className="modal-title">Confirm Logout</h3>
+            <p style={{ margin: "12px 0" }}>
+              Are you sure you want to log out?
+            </p>
+            <div className="btn-row">
+              <button
+                type="button"
+                className="button"
+                onClick={handleLogoutConfirm}
+              >
+                Yes, Log out
+              </button>
+              <button
+                type="button"
+                className="button ghost"
+                onClick={() => setShowLogoutConfirm(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

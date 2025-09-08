@@ -1,28 +1,32 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FaKeyboard, FaLock, FaGoogle } from "react-icons/fa";
-import "./style.css";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "./style.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [ripple, setRipple] = useState({ show: false, x: 0, y: 0 });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleLoginClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setRipple({
-      show: false,
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-    requestAnimationFrame(() =>
-      setRipple({
-        show: true,
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      })
-    );
+    e.preventDefault();
 
-    setTimeout(() => navigate("/Dashboard"), 160);
+    // Basic login logic
+    if (username === "Bob" && password === "123") {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username: "Bob", role: "user" })
+      );
+      navigate("/Dashboard");
+    } else if (username === "Admin" && password === "admin123") {
+      localStorage.setItem(
+        "user",
+        JSON.stringify({ username: "Admin", role: "admin" })
+      );
+      navigate("/Dashboard");
+    } else {
+      setError("Invalid username or password");
+    }
   };
 
   return (
@@ -47,16 +51,29 @@ const LoginPage = () => {
       {/* Login form */}
       <div className="login-form">
         <h2>Sign in</h2>
-        {/* Username */}
+
         <div className="input-box">
           <label className="input-label">Username</label>
-          <input type="text" />
+          <input
+            type="text"
+            placeholder="Enter your username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
-        {/* Password */}
+
         <div className="input-box">
           <label className="input-label">Password</label>
-          <input type="password" />
+          <input
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
+
+        {error && <p className="field-error">{error}</p>}
+
         <div className="options">
           <label>
             <input type="checkbox" /> Remember me
@@ -65,23 +82,12 @@ const LoginPage = () => {
         </div>
 
         <button className="button" onClick={handleLoginClick}>
-          <span>Sign in</span>
-          {ripple.show && (
-            <span
-              className="ripple-circle"
-              style={{ left: ripple.x, top: ripple.y }}
-            />
-          )}
+          Sign in
         </button>
 
         <div className="register-link">
           Don’t have an account? <Link to="/Register">Create Account</Link>
         </div>
-        <hr className="divider" />
-        <p className="or-text">Or sign in with</p>
-        <button className="google-button">
-          <FaGoogle />
-        </button>
       </div>
     </div>
   );
